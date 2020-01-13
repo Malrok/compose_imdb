@@ -16,6 +16,17 @@ android {
 
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        def tmdbApiKey = properties.getProperty("tmdb_api_key", "")
+
+        it.buildConfigField 'String', "TMDB_API_KEY", tmdbApiKey
+
+        it.resValue 'string', "api_key", tmdbApiKey
+
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -45,6 +56,13 @@ dependencies {
     implementation 'androidx.ui:ui-layout:0.1.0-dev03'
     implementation 'androidx.ui:ui-material:0.1.0-dev03'
     implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
