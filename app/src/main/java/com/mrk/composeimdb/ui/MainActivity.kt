@@ -11,31 +11,22 @@ import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.network.TmdbClient
 
 class MainActivity : AppCompatActivity() {
-    private var movies: List<Movie>? = emptyList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val tmdb = TmdbClient()
 
-//        MainScope().launch {
-//            movies = tmdb.getTmdbService().getRecentMovies("2019-12-01", "2020-01-13").results
-//        }
-
         Thread {
             val response =
                 tmdb.getTmdbService().getRecentMovies("2019-12-01", "2020-01-13").execute()
             runOnUiThread {
-                movies = response.body()?.results
+                setContent {
+                    MaterialTheme {
+                        MoviesList(movies = response.body()?.results!!)
+                    }
+                }
             }
         }.start()
-
-
-        setContent {
-            MaterialTheme {
-                MoviesList(movies = movies!!)
-            }
-        }
     }
 }
 
