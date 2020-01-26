@@ -3,37 +3,35 @@ package com.mrk.composeimdb.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.unaryPlus
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.layout.Column
 import androidx.ui.material.MaterialTheme
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.network.TmdbClient
+import com.mrk.composeimdb.repositories.network.TmdbService
+import com.mrk.composeimdb.ui.functions.observe
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tmdb = TmdbClient()
+        val tmdb = TmdbClient().getTmdbService()
 
-        Thread {
-            val response =
-                tmdb.getTmdbService().getRecentMovies("2019-12-01", "2020-01-13").execute()
-            runOnUiThread {
-                setContent {
-                    MaterialTheme {
-                        MoviesList(movies = response.body()?.results!!)
-                    }
-                }
+        setContent {
+            MaterialTheme {
+                MoviesList(tmdb = tmdb)
             }
-        }.start()
+        }
     }
 }
 
 @Composable
-fun MoviesList(movies: List<Movie>) {
+fun MoviesList(tmdb: TmdbService) {
     Column {
-        movies.forEach { movie ->
+        val movies = +observe(tmdb.getRecentMovies("2019-12-01", "2020-01-13"))
+        movies?.body?.results?.forEach { movie ->
             Text(
                 text = movie.title
             )

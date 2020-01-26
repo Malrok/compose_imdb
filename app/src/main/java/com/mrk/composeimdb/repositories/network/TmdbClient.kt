@@ -2,6 +2,7 @@ package com.mrk.composeimdb.repositories.network
 
 import com.google.gson.GsonBuilder
 import com.mrk.composeimdb.BuildConfig
+import me.alfredobejarano.retrofitadapters.LiveDataAdapter
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,6 +23,7 @@ class TmdbClient {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(LiveDataAdapter.Factory())
             .client(getHttpClientBuilder().build())
             .build()
     }
