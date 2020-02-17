@@ -50,18 +50,18 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.ui:ui-framework:0.1.0-dev03'
-    implementation 'androidx.ui:ui-layout:0.1.0-dev03'
-    implementation 'androidx.ui:ui-material:0.1.0-dev03'
-    implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
+    implementation("androidx.ui:ui-framework:$compose_version")
+    implementation("androidx.ui:ui-layout:$compose_version")
+    implementation("androidx.ui:ui-material:$compose_version")
+    implementation("androidx.ui:ui-foundation:$compose_version")
+    implementation("androidx.ui:ui-animation:$compose_version")
+    implementation("androidx.ui:ui-tooling:$compose_version")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
-//    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
-//    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     implementation 'me.alfredobejarano.retrofitadapters:livedata:0.0.2'
 
     // Coroutines

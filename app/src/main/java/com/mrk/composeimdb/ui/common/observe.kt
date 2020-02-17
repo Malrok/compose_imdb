@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.ui.functions
+package com.mrk.composeimdb.ui.common
 
 import androidx.compose.*
 import androidx.lifecycle.LiveData
