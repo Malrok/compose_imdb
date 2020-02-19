@@ -23,9 +23,9 @@ fun MovieDetail(tmdb: TmdbService, movieId: String) {
         Column {
             TopAppBar(
                 title = { Text(text = "Imdb") },
-                        navigationIcon = {
+                navigationIcon = {
                     VectorImageButton(R.drawable.ic_back) {
-                        navigateTo(Screen.MoviesList)
+                        navigateTo(Screen.RecentMovies)
                     }
                 }
             )

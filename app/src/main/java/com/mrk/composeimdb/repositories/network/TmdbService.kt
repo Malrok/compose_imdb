@@ -16,4 +16,6 @@ interface TmdbService {
     @GET("movie/{movieId}")
     fun getMovieById(@Path("movieId") movieId: String): LiveData<ApiResult<Movie>>
 
+    @GET("search/movie")
+    fun getMoviesListByTitle(@Query("query") title: String): LiveData<ApiResult<TmdbListResult>>
 }

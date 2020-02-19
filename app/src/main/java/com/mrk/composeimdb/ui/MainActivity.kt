@@ -11,7 +11,8 @@ import androidx.ui.material.surface.Surface
 import com.mrk.composeimdb.repositories.network.TmdbClient
 import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.detail.MovieDetail
-import com.mrk.composeimdb.ui.list.MoviesList
+import com.mrk.composeimdb.ui.recent.RecentMovies
+import com.mrk.composeimdb.ui.search.SearchMovie
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,30 +36,11 @@ fun Content(tmdb: TmdbService) {
         Crossfade(ImdbStatus.currentScreen) { screen ->
             Surface(color = (+MaterialTheme.colors()).background) {
                 when (screen) {
-                    is Screen.MoviesList -> MoviesList(tmdb = tmdb)
+                    is Screen.RecentMovies -> RecentMovies(tmdb)
+                    is Screen.SearchMovie -> SearchMovie(tmdb)
                     is Screen.Detail -> MovieDetail(tmdb, screen.movieId)
                 }
             }
         }
     }
 }
-
-//@Composable
-//fun Edit() {
-//    val state = +state { EditorModel("yoh") }
-//    TextField(
-//        value = state.value,
-//        onValueChange = {
-//            Log.d("Edit", "yoh")
-//            state.value = it
-//        }
-//    )
-//}
-
-//@Preview
-//@Composable
-//fun DefaultPreview() {
-//    MaterialTheme {
-//        MoviesList(movies = )
-//    }
-//}
