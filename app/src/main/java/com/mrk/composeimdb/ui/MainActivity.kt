@@ -3,7 +3,6 @@ package com.mrk.composeimdb.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.unaryPlus
 import androidx.ui.animation.Crossfade
 import androidx.ui.core.setContent
 import androidx.ui.material.MaterialTheme
@@ -34,7 +33,7 @@ fun Content(tmdb: TmdbService) {
         colors = lightThemeColors
     ) {
         Crossfade(ImdbStatus.currentScreen) { screen ->
-            Surface(color = (+MaterialTheme.colors()).background) {
+            Surface(color = (MaterialTheme.colors()).background) {
                 when (screen) {
                     is Screen.RecentMovies -> RecentMovies(tmdb)
                     is Screen.SearchMovie -> SearchMovie(tmdb)

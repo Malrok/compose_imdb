@@ -1,24 +1,28 @@
 package com.mrk.composeimdb.ui.detail
 
 import androidx.compose.Composable
-import androidx.compose.unaryPlus
 import androidx.ui.core.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
 import androidx.ui.material.TopAppBar
 import com.mrk.composeimdb.R
+import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.Screen
 import com.mrk.composeimdb.ui.VectorImageButton
 import com.mrk.composeimdb.ui.common.observe
 import com.mrk.composeimdb.ui.navigateTo
+import me.alfredobejarano.retrofitadapters.data.ApiResult
 
 @Composable
 fun MovieDetail(tmdb: TmdbService, movieId: String) {
 
-    val queryResult = +observe(tmdb.getMovieById(movieId))
+    var queryResult: ApiResult<Movie>? = null
+    observe({tmdb.getMovieById(movieId)}) {
+        queryResult = it
+    }
     if (queryResult?.body != null) {
-        val movie = queryResult.body!!
+        val movie = queryResult?.body!!
 
         Column {
             TopAppBar(
@@ -29,7 +33,7 @@ fun MovieDetail(tmdb: TmdbService, movieId: String) {
                     }
                 }
             )
-            VerticalScroller(modifier = Flexible(1f)) {
+            VerticalScroller {
                 Column {
                     Text(movie.title)
                     Text(movie.overview)
