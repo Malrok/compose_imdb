@@ -29,16 +29,12 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun Content(tmdb: TmdbService) {
-    MaterialTheme(
-        colors = lightThemeColors
-    ) {
-        Crossfade(ImdbStatus.currentScreen) { screen ->
-            Surface(color = (MaterialTheme.colors()).background) {
-                when (screen) {
-                    is Screen.RecentMovies -> RecentMovies(tmdb)
-                    is Screen.SearchMovie -> SearchMovie(tmdb)
-                    is Screen.Detail -> MovieDetail(tmdb, screen.movieId)
-                }
+    Crossfade(ImdbStatus.currentScreen) { screen ->
+        Surface(color = (MaterialTheme.colors()).background) {
+            when (screen) {
+                is Screen.RecentMovies -> RecentMovies(tmdb)
+                is Screen.SearchMovie -> SearchMovie(tmdb)
+                is Screen.Detail -> MovieDetail(tmdb, screen.movieId)
             }
         }
     }

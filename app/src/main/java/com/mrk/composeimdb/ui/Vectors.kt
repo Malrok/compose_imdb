@@ -2,11 +2,13 @@ package com.mrk.composeimdb.ui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
+import androidx.ui.core.DensityAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.Container
+import androidx.ui.layout.LayoutSize
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
 
@@ -22,7 +24,11 @@ fun VectorImageButton(@DrawableRes id: Int, onClick: () -> Unit) {
 @Composable
 fun VectorImage(modifier: Modifier = Modifier.None, @DrawableRes id: Int, tint: Color = Color.Transparent) {
     val vector = vectorResource(id)
-    Container(modifier = modifier) {
-        DrawVector(vector, tint)
+    with(DensityAmbient.current) {
+        Container(
+            modifier = modifier + LayoutSize(vector.defaultWidth, vector.defaultHeight)
+        ) {
+            DrawVector(vector, tint)
+        }
     }
 }

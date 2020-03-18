@@ -17,12 +17,10 @@ import me.alfredobejarano.retrofitadapters.data.ApiResult
 @Composable
 fun MovieDetail(tmdb: TmdbService, movieId: String) {
 
-    var queryResult: ApiResult<Movie>? = null
-    observe({tmdb.getMovieById(movieId)}) {
-        queryResult = it
-    }
+    val queryResult: ApiResult<Movie>? = observe(tmdb.getMovieById(movieId))
+
     if (queryResult?.body != null) {
-        val movie = queryResult?.body!!
+        val movie = queryResult.body!!
 
         Column {
             TopAppBar(

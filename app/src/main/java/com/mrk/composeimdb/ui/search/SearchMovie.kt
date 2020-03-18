@@ -16,23 +16,23 @@ import me.alfredobejarano.retrofitadapters.data.ApiResult
 @Composable
 fun SearchMovie(tmdb: TmdbService) {
     val state = state { TextFieldValue("") }
-    var movies: List<Movie> = emptyList()
+    val movies: List<Movie> = emptyList()
 
     Column {
         TextField(
-            value = state.value,
-            onValueChange = {
-                state.value = it
-                var apiResult: ApiResult<TmdbListResult>? = null
-                observe({tmdb.getMoviesListByTitle(it.toString())}) {result ->
-                    apiResult = result
-                }
-                if (apiResult?.error != null) {
-                    movies = apiResult?.body?.results!!
-                } else {
-                    Log.d("an error occurred", apiResult?.error!!)
-                }
-            }
+            value = state.value
+//            onValueChange = {
+//                state.value = it
+//                var apiResult: ApiResult<TmdbListResult>? = null
+//                observe({tmdb.getMoviesListByTitle(it.toString())}) {result ->
+//                    apiResult = result
+//                }
+//                if (apiResult?.error != null) {
+//                    movies = apiResult?.body?.results!!
+//                } else {
+//                    Log.d("an error occurred", apiResult?.error!!)
+//                }
+//            }
         )
         if (movies.isNotEmpty()) {
             movies.forEach { movie ->
