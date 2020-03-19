@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         val tmdb = TmdbClient().getTmdbService()
 
         setContent {
-            MaterialTheme {
+            MaterialTheme(
+                colors = lightThemeColors
+            ) {
                 Content(tmdb = tmdb)
             }
         }

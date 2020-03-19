@@ -6,9 +6,13 @@ import androidx.ui.core.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
 import androidx.ui.material.TopAppBar
+import com.mrk.composeimdb.R
 import com.mrk.composeimdb.repositories.network.TmdbService
+import com.mrk.composeimdb.ui.Screen
+import com.mrk.composeimdb.ui.VectorImageButton
 import com.mrk.composeimdb.ui.common.MovieCard
 import com.mrk.composeimdb.ui.common.observe
+import com.mrk.composeimdb.ui.navigateTo
 import java.util.*
 
 @Composable
@@ -23,7 +27,12 @@ fun RecentMovies(tmdb: TmdbService) {
 
     Column {
         TopAppBar(
-            title = { Text(text = "Imdb") }
+            title = { Text(text = "Imdb") },
+            actions = {
+                VectorImageButton(R.drawable.ic_search) {
+                    navigateTo(Screen.SearchMovie)
+                }
+            }
         )
         VerticalScroller {
             Column {
