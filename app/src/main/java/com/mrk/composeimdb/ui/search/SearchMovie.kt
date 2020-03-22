@@ -3,6 +3,7 @@ package com.mrk.composeimdb.ui.search
 import android.util.Log
 import androidx.compose.Composable
 import androidx.compose.state
+import androidx.ui.core.Text
 import androidx.ui.core.TextField
 import androidx.ui.layout.Column
 import androidx.ui.text.TextFieldValue
@@ -27,6 +28,8 @@ fun SearchMovie(tmdb: TmdbService) {
             movies.forEach { movie ->
                 MovieCard(movie)
             }
+        } else {
+            Text(text = "No movies found")
         }
     }
 }

@@ -3,13 +3,13 @@ package com.mrk.composeimdb.ui.recent
 import android.text.format.DateFormat
 import androidx.compose.Composable
 import androidx.ui.core.Text
-import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.AdapterList
 import androidx.ui.layout.Column
 import androidx.ui.material.TopAppBar
 import com.mrk.composeimdb.R
 import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.Screen
-import com.mrk.composeimdb.ui.VectorImageButton
+import com.mrk.composeimdb.ui.common.VectorImageButton
 import com.mrk.composeimdb.ui.common.MovieCard
 import com.mrk.composeimdb.ui.common.observe
 import com.mrk.composeimdb.ui.navigateTo
@@ -34,13 +34,12 @@ fun RecentMovies(tmdb: TmdbService) {
                 }
             }
         )
-        VerticalScroller {
-            Column {
-
-                movies?.body?.results?.forEach { movie ->
-                    MovieCard(movie)
-                }
+        if (movies != null) {
+            AdapterList(data = movies.body?.results!!) {
+                MovieCard(movie = it)
             }
+        } else {
+            Text(text = "Loading")
         }
     }
 }

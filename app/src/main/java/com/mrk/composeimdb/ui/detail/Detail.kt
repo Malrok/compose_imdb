@@ -9,7 +9,7 @@ import com.mrk.composeimdb.R
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.Screen
-import com.mrk.composeimdb.ui.VectorImageButton
+import com.mrk.composeimdb.ui.common.VectorImageButton
 import com.mrk.composeimdb.ui.common.observe
 import com.mrk.composeimdb.ui.navigateTo
 import me.alfredobejarano.retrofitadapters.data.ApiResult
