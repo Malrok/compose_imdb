@@ -9,10 +9,12 @@ import androidx.ui.core.Text
 import androidx.ui.graphics.asImageAsset
 import androidx.ui.layout.Container
 import androidx.ui.unit.Dp
+import com.mrk.composeimdb.ui.ambients.TmdbConfigurationAmbient
 import com.squareup.picasso.Picasso
 
 @Composable
 fun ImageNetwork(url: String?, width: Dp, height: Dp) {
+    val configuration = TmdbConfigurationAmbient.current
     val image = state<Bitmap?> { null }
 
     onCommit(url) {
@@ -29,7 +31,7 @@ fun ImageNetwork(url: String?, width: Dp, height: Dp) {
             }
         }
         picasso
-            .load(url)
+            .load(configuration.images.imageBaseUrl + configuration.images.posterSizes[0] + url)
             .into(target)
 
         onDispose {

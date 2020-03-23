@@ -7,16 +7,17 @@ import androidx.ui.foundation.AdapterList
 import androidx.ui.layout.Column
 import androidx.ui.material.TopAppBar
 import com.mrk.composeimdb.R
-import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.Screen
 import com.mrk.composeimdb.ui.common.VectorImageButton
 import com.mrk.composeimdb.ui.common.MovieCard
+import com.mrk.composeimdb.ui.ambients.TmdbServiceAmbient
 import com.mrk.composeimdb.ui.common.observe
 import com.mrk.composeimdb.ui.navigateTo
 import java.util.*
 
 @Composable
-fun RecentMovies(tmdb: TmdbService) {
+fun RecentMovies() {
+    val tmdb = TmdbServiceAmbient.current
     val now = Calendar.getInstance()
     val before = Calendar.getInstance()
     before.add(Calendar.DAY_OF_MONTH, -30)

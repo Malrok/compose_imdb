@@ -7,16 +7,16 @@ import androidx.ui.layout.Column
 import androidx.ui.material.TopAppBar
 import com.mrk.composeimdb.R
 import com.mrk.composeimdb.models.Movie
-import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.Screen
+import com.mrk.composeimdb.ui.ambients.TmdbServiceAmbient
 import com.mrk.composeimdb.ui.common.VectorImageButton
 import com.mrk.composeimdb.ui.common.observe
 import com.mrk.composeimdb.ui.navigateTo
 import me.alfredobejarano.retrofitadapters.data.ApiResult
 
 @Composable
-fun MovieDetail(tmdb: TmdbService, movieId: String) {
-
+fun MovieDetail(movieId: String) {
+    val tmdb = TmdbServiceAmbient.current
     val queryResult: ApiResult<Movie>? = observe(tmdb.getMovieById(movieId))
 
     if (queryResult?.body != null) {

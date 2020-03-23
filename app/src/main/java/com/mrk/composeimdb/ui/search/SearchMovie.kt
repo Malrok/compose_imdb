@@ -10,10 +10,12 @@ import androidx.ui.text.TextFieldValue
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.network.TmdbService
 import com.mrk.composeimdb.ui.common.MovieCard
+import com.mrk.composeimdb.ui.ambients.TmdbServiceAmbient
 import com.mrk.composeimdb.ui.common.observe
 
 @Composable
-fun SearchMovie(tmdb: TmdbService) {
+fun SearchMovie() {
+    val tmdb = TmdbServiceAmbient.current
     val state = state { TextFieldValue("") }
     val movies: List<Movie> = fetchMovies(tmdb = tmdb, search = state.value.text)
 
