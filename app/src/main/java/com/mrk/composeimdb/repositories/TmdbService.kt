@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.repositories.network
+package com.mrk.composeimdb.repositories
 
 import androidx.lifecycle.LiveData
 import com.mrk.composeimdb.models.Configuration

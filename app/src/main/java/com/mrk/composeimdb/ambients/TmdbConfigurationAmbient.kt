@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.ui.ambients
+package com.mrk.composeimdb.ambients
 
 import androidx.compose.ambientOf
 import com.mrk.composeimdb.models.Configuration

@@ -9,7 +9,7 @@ import androidx.ui.core.Text
 import androidx.ui.graphics.asImageAsset
 import androidx.ui.layout.Container
 import androidx.ui.unit.Dp
-import com.mrk.composeimdb.ui.ambients.TmdbConfigurationAmbient
+import com.mrk.composeimdb.ambients.TmdbConfigurationAmbient
 import com.squareup.picasso.Picasso
 
 @Composable

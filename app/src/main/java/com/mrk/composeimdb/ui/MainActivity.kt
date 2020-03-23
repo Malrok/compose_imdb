@@ -10,12 +10,15 @@ import androidx.ui.core.setContent
 import androidx.ui.layout.Center
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
-import com.mrk.composeimdb.repositories.network.TmdbClient
-import com.mrk.composeimdb.repositories.network.TmdbService
-import com.mrk.composeimdb.ui.ambients.TmdbConfigurationAmbient
-import com.mrk.composeimdb.ui.ambients.TmdbServiceAmbient
-import com.mrk.composeimdb.ui.common.observe
+import com.mrk.composeimdb.repositories.TmdbClient
+import com.mrk.composeimdb.repositories.TmdbService
+import com.mrk.composeimdb.theme.lightThemeColors
+import com.mrk.composeimdb.ambients.TmdbConfigurationAmbient
+import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.ui.detail.MovieDetail
+import com.mrk.composeimdb.navigation.Navigation
+import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.ui.recent.RecentMovies
 import com.mrk.composeimdb.ui.search.SearchMovie
 
@@ -33,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun Content(tmdb: TmdbService) {
-    val configurationResult = observe(tmdb.getConfig())
+    val configurationResult =
+        observe(tmdb.getConfig())
 
     MaterialTheme(
         colors = lightThemeColors
@@ -60,7 +64,7 @@ fun Splashscreen() {
 
 @Composable
 fun Main() {
-    Crossfade(ImdbStatus.currentScreen) { screen ->
+    Crossfade(Navigation.currentScreen) { screen ->
         Surface(color = (MaterialTheme.colors()).background) {
             when (screen) {
                 is Screen.RecentMovies -> RecentMovies()

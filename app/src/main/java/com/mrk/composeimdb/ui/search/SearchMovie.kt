@@ -8,10 +8,10 @@ import androidx.ui.core.TextField
 import androidx.ui.layout.Column
 import androidx.ui.text.TextFieldValue
 import com.mrk.composeimdb.models.Movie
-import com.mrk.composeimdb.repositories.network.TmdbService
+import com.mrk.composeimdb.repositories.TmdbService
 import com.mrk.composeimdb.ui.common.MovieCard
-import com.mrk.composeimdb.ui.ambients.TmdbServiceAmbient
-import com.mrk.composeimdb.ui.common.observe
+import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.effects.observe
 
 @Composable
 fun SearchMovie() {
@@ -38,7 +38,8 @@ fun SearchMovie() {
 
 @Composable
 fun fetchMovies(tmdb: TmdbService, search: String): List<Movie> {
-    val apiResult = observe(tmdb.getMoviesListByTitle(search))
+    val apiResult =
+        observe(tmdb.getMoviesListByTitle(search))
     return if (apiResult != null && apiResult.error == null) {
         apiResult.body?.results!!
     } else {

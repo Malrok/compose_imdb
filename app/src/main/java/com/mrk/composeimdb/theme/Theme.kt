@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.ui
+package com.mrk.composeimdb.theme
 
 import androidx.ui.graphics.Color
 import androidx.ui.material.lightColorPalette

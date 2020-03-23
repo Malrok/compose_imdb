@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.ui
+package com.mrk.composeimdb.navigation
 
 import androidx.compose.Model
 
@@ -12,13 +12,14 @@ sealed class Screen {
 }
 
 @Model
-object ImdbStatus {
-    var currentScreen: Screen = Screen.RecentMovies
+object Navigation {
+    var currentScreen: Screen =
+        Screen.RecentMovies
 }
 
 /**
  * Temporary solution pending navigation support.
  */
 fun navigateTo(destination: Screen) {
-    ImdbStatus.currentScreen = destination
+    Navigation.currentScreen = destination
 }

@@ -1,4 +1,4 @@
-package com.mrk.composeimdb.repositories.network
+package com.mrk.composeimdb.repositories
 
 import com.google.gson.GsonBuilder
 import com.mrk.composeimdb.BuildConfig
