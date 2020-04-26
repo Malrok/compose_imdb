@@ -6,7 +6,7 @@ import androidx.ui.core.setContent
 import com.mrk.composeimdb.navigation.Navigation
 import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.navigation.navigateTo
-import com.mrk.composeimdb.pages.home.Content
+import com.mrk.composeimdb.pages.Root
 import com.mrk.composeimdb.repositories.TmdbClient
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val tmdb = TmdbClient().getTmdbService()
 
         setContent {
-            Content(tmdb = tmdb)
+            Root(tmdb)
         }
     }
 

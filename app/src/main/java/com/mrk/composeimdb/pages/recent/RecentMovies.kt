@@ -2,8 +2,14 @@ package com.mrk.composeimdb.pages.recent
 
 import android.text.format.DateFormat
 import androidx.compose.Composable
+import androidx.ui.core.Alignment
+import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Text
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.wrapContentSize
+import androidx.ui.material.CircularProgressIndicator
 import com.mrk.composeimdb.ambients.TmdbServiceAmbient
 import com.mrk.composeimdb.components.MovieCard
 import com.mrk.composeimdb.effects.observe
@@ -30,6 +36,10 @@ fun RecentMovies() {
             MovieCard(movie = it)
         }
     } else {
-        Text(text = "Loading")
+        Box(
+            modifier = Modifier.fillMaxSize() + Modifier.wrapContentSize(Alignment.Center)
+        ) {
+            CircularProgressIndicator()
+        }
     }
 }

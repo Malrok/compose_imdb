@@ -1,69 +1,24 @@
 package com.mrk.composeimdb.pages.home
 
-import androidx.compose.*
-import androidx.ui.animation.Crossfade
-import androidx.ui.core.Alignment
+import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
+import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.wrapContentSize
+import androidx.ui.layout.padding
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.icons.filled.Home
 import androidx.ui.material.icons.filled.Search
-import com.mrk.composeimdb.ambients.TmdbConfigurationAmbient
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
-import com.mrk.composeimdb.effects.observe
-import com.mrk.composeimdb.navigation.Navigation
-import com.mrk.composeimdb.navigation.Screen
-import com.mrk.composeimdb.pages.detail.MovieDetail
+import androidx.ui.res.stringResource
+import androidx.ui.unit.dp
+import com.mrk.composeimdb.R
 import com.mrk.composeimdb.pages.recent.RecentMovies
 import com.mrk.composeimdb.pages.search.SearchMovie
-import com.mrk.composeimdb.repositories.TmdbService
-import com.mrk.composeimdb.theme.lightThemeColors
-
-@Composable
-fun Content(tmdb: TmdbService) {
-    val configurationResult =
-        observe(tmdb.getConfig())
-
-    MaterialTheme(
-        colors = lightThemeColors
-    ) {
-        if (configurationResult != null && configurationResult.error == null && configurationResult.body != null) {
-            Providers(
-                TmdbServiceAmbient provides tmdb,
-                TmdbConfigurationAmbient provides configurationResult.body!!
-            ) {
-                Main()
-            }
-        } else {
-            Splashscreen()
-        }
-    }
-}
-
-@Composable
-fun Splashscreen() {
-    Box(
-        modifier = Modifier.fillMaxSize() + Modifier.wrapContentSize(Alignment.Center)
-    ) {
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
-fun Main() {
-    Crossfade(Navigation.currentScreen) { screen ->
-        when (screen) {
-            is Screen.Home -> Home()
-            is Screen.Detail -> MovieDetail(screen.movieId)
-        }
-    }
-}
 
 @Composable
 fun Home() {
@@ -72,16 +27,20 @@ fun Home() {
     Scaffold(
         topAppBar = {
             TopAppBar(
-                title = { Text(text = "Search movie") }
+                title = { Text(text = stringResource(id = R.string.app_name)) }
             )
         },
         bodyContent = {
-            when (selectedIndex) {
-                0 -> RecentMovies()
-                1 -> SearchMovie()
-                2 -> {
-                    // TODO
-                    Box()
+            Box(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                when (selectedIndex) {
+                    0 -> RecentMovies()
+                    1 -> SearchMovie()
+                    2 -> {
+                        // TODO
+                        Box()
+                    }
                 }
             }
         },

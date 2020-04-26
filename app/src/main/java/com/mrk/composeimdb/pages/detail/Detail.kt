@@ -6,6 +6,7 @@ import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
 import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
+import androidx.ui.res.stringResource
 import androidx.ui.unit.dp
 import com.mrk.composeimdb.R
 import com.mrk.composeimdb.ambients.TmdbServiceAmbient
@@ -26,7 +27,7 @@ fun MovieDetail(movieId: String) {
     Scaffold(
         topAppBar = {
             TopAppBar(
-                title = { Text(text = "Imdb") },
+                title = { Text(text = stringResource(id = R.string.app_name)) },
                 navigationIcon = {
                     IconButton(
                         id = R.drawable.ic_back
