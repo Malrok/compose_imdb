@@ -51,14 +51,18 @@ fun SearchMovie() {
 
 @Composable
 fun fetchMovies(tmdb: TmdbService, search: String): List<Movie> {
-    val apiResult =
-        observe(tmdb.getMoviesListByTitle(search))
-    return if (apiResult != null && apiResult.error == null) {
-        apiResult.body?.results!!
-    } else {
-        if (apiResult != null) {
-            Log.d("an error occurred", apiResult.error!!)
+    return if (search.isNotEmpty()) {
+        val apiResult =
+            observe(tmdb.getMoviesListByTitle(search))
+        if (apiResult != null && apiResult.error == null) {
+            apiResult.body?.results!!
+        } else {
+            if (apiResult != null) {
+                Log.d("an error occurred", apiResult.error!!)
+            }
+            emptyList()
         }
+    } else {
         emptyList()
     }
 }
