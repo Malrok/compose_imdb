@@ -1,20 +1,22 @@
-package com.mrk.composeimdb.ui.common
+package com.mrk.composeimdb.components
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Alignment
+import androidx.ui.core.Modifier
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.Image
 import androidx.ui.graphics.asImageAsset
-import androidx.ui.layout.Container
+import androidx.ui.layout.preferredSize
+import androidx.ui.layout.wrapContentSize
 import androidx.ui.unit.Dp
-import com.mrk.composeimdb.ambients.TmdbConfigurationAmbient
 import com.squareup.picasso.Picasso
 
 @Composable
 fun ImageNetwork(url: String?, width: Dp, height: Dp) {
-    val configuration = TmdbConfigurationAmbient.current
     val image = state<Bitmap?> { null }
 
     onCommit(url) {
@@ -31,7 +33,7 @@ fun ImageNetwork(url: String?, width: Dp, height: Dp) {
             }
         }
         picasso
-            .load(configuration.images.imageBaseUrl + configuration.images.posterSizes[0] + url)
+            .load(url)
             .into(target)
 
         onDispose {
@@ -40,11 +42,11 @@ fun ImageNetwork(url: String?, width: Dp, height: Dp) {
         }
     }
 
-    Container(height = height, width = width) {
+    Box(
+        modifier = Modifier.preferredSize(width, height) + Modifier.wrapContentSize(Alignment.Center)
+    ) {
         if (image.value != null) {
-            androidx.ui.foundation.Image(image = image.value!!.asImageAsset())
-        } else {
-            Text("loading...")
+            Image(image.value!!.asImageAsset())
         }
     }
 }

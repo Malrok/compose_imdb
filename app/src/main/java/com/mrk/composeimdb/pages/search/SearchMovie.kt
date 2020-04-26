@@ -1,17 +1,16 @@
-package com.mrk.composeimdb.ui.search
+package com.mrk.composeimdb.pages.search
 
 import android.util.Log
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.ui.core.Text
-import androidx.ui.core.TextField
-import androidx.ui.layout.Column
-import androidx.ui.text.TextFieldValue
+import androidx.ui.foundation.Text
+import androidx.ui.foundation.TextField
+import androidx.ui.foundation.TextFieldValue
+import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.components.MovieCard
+import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.repositories.TmdbService
-import com.mrk.composeimdb.ui.common.MovieCard
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
-import com.mrk.composeimdb.effects.observe
 
 @Composable
 fun SearchMovie() {
@@ -19,20 +18,18 @@ fun SearchMovie() {
     val state = state { TextFieldValue("") }
     val movies: List<Movie> = fetchMovies(tmdb = tmdb, search = state.value.text)
 
-    Column {
-        TextField(
-            value = state.value,
-            onValueChange = {
-                state.value = it
-            }
-        )
-        if (movies.isNotEmpty()) {
-            movies.forEach { movie ->
-                MovieCard(movie)
-            }
-        } else {
-            Text(text = "No movies found")
+    TextField(
+        value = state.value,
+        onValueChange = {
+            state.value = it
         }
+    )
+    if (movies.isNotEmpty()) {
+        movies.forEach { movie ->
+            MovieCard(movie)
+        }
+    } else {
+        Text(text = "No movies found")
     }
 }
 
