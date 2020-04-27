@@ -10,12 +10,12 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Surface
 import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
 import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.MovieCard
-import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.viewmodels.MainViewModel
 import timber.log.Timber
@@ -52,8 +52,7 @@ fun SearchMovie() {
 @Composable
 fun fetchMovies(viewModel: MainViewModel, search: String): List<Movie> {
     return if (search.isNotEmpty()) {
-        val apiResult =
-            observe(viewModel.getMoviesListByTitle(search))
+        val apiResult = viewModel.getMoviesListByTitle(search).observeAsState().value
         if (apiResult != null && apiResult.error == null) {
             apiResult.body?.results!!
         } else {

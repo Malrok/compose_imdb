@@ -8,10 +8,10 @@ import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.wrapContentSize
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.CircularProgressIndicator
 import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.MovieCard
-import com.mrk.composeimdb.effects.observe
 import java.util.*
 
 @Composable
@@ -23,12 +23,10 @@ fun RecentMovies() {
     val maxDate = DateFormat.format("yyyy-MM-dd", now).toString()
     val minDate = DateFormat.format("yyyy-MM-dd", before).toString()
 
-    val movies = observe(
-        viewModel.getRecentMovies(
+    val movies = viewModel.getRecentMovies(
             minDate,
             maxDate
-        )
-    )
+        ).observeAsState().value
 
     if (movies != null) {
         AdapterList(data = movies.body?.results!!) {

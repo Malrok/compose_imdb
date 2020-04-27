@@ -8,7 +8,6 @@ import com.mrk.composeimdb.navigation.Navigation
 import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.navigation.navigateTo
 import com.mrk.composeimdb.pages.Root
-import com.mrk.composeimdb.repositories.TmdbClient
 import com.mrk.composeimdb.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {

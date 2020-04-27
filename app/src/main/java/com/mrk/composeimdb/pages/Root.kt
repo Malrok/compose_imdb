@@ -3,9 +3,9 @@ package com.mrk.composeimdb.pages
 import androidx.compose.Composable
 import androidx.compose.Providers
 import androidx.ui.animation.Crossfade
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.MaterialTheme
 import com.mrk.composeimdb.ambients.ViewModelAmbient
-import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.navigation.Navigation
 import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.pages.detail.MovieDetail
@@ -16,8 +16,7 @@ import com.mrk.composeimdb.viewmodels.MainViewModel
 
 @Composable
 fun Root(viewModel: MainViewModel) {
-    val configurationResult =
-        observe(viewModel.getConfig())
+    val configurationResult = viewModel.getConfig().observeAsState().value
 
     MaterialTheme(
         colors = lightThemeColors

@@ -56,6 +56,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation("androidx.ui:ui-framework:$compose_version")
     implementation("androidx.ui:ui-layout:$compose_version")
@@ -63,7 +64,7 @@ dependencies {
     implementation("androidx.ui:ui-foundation:$compose_version")
     implementation("androidx.ui:ui-animation:$compose_version")
     implementation("androidx.ui:ui-tooling:$compose_version")
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.ui:ui-livedata:$compose_version"
 
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'

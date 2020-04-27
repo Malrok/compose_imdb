@@ -4,6 +4,7 @@ import androidx.compose.Composable
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Scaffold
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.stringResource
@@ -12,7 +13,6 @@ import com.mrk.composeimdb.R
 import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.IconButton
 import com.mrk.composeimdb.components.ImageNetwork
-import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.effects.tmdbImageUrl
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.navigation.Screen
@@ -22,7 +22,7 @@ import me.alfredobejarano.retrofitadapters.data.ApiResult
 @Composable
 fun MovieDetail(movieId: String) {
     val viewModel = ViewModelAmbient.current
-    val queryResult: ApiResult<Movie>? = observe(viewModel.getMovieById(movieId))
+    val queryResult: ApiResult<Movie>? = viewModel.getMovieById(movieId).observeAsState().value
 
     Scaffold(
         topAppBar = {
