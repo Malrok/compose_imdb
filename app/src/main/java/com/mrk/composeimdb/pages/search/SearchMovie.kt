@@ -6,11 +6,11 @@ import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.*
-import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.livedata.observeAsState
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
 import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
@@ -28,8 +28,8 @@ fun SearchMovie() {
 
     Column {
         Surface(
-            modifier = Modifier.fillMaxWidth(),
-            border = Border(size = Dp.Hairline, color = Color.LightGray)
+            modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp),
+            border = Border(size = Dp.Hairline, color = MaterialTheme.colors.secondary)
         ) {
             TextField(
                 modifier = Modifier.padding(16.dp),

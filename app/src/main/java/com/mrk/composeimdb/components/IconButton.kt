@@ -5,6 +5,7 @@ import androidx.compose.Composable
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Icon
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ripple.ripple
 import androidx.ui.res.vectorResource
 
@@ -14,6 +15,9 @@ fun IconButton(@DrawableRes id: Int, onClick: () -> Unit) {
         onClick = onClick,
         modifier = Modifier.ripple()
     ) {
-        Icon(vectorResource(id = id))
+        Icon(
+            tint = MaterialTheme.colors.secondary,
+            asset = vectorResource(id = id)
+        )
     }
 }

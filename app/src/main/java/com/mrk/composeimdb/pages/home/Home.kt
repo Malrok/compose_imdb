@@ -27,7 +27,12 @@ fun Home() {
     Scaffold(
         topAppBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_name)) }
+                title = {
+                    Text(
+                        color = MaterialTheme.colors.secondary,
+                        text = stringResource(id = R.string.app_name)
+                    )
+                }
             )
         },
         bodyContent = {
@@ -54,7 +59,8 @@ fun Home() {
                         selected = selectedIndex == 0,
                         onSelected = {
                             selectedIndex = 0
-                        }
+                        },
+                        activeColor = MaterialTheme.colors.secondary
                     )
                     BottomNavigationItem(
                         icon = {
@@ -63,7 +69,8 @@ fun Home() {
                         selected = selectedIndex == 1,
                         onSelected = {
                             selectedIndex = 1
-                        }
+                        },
+                        activeColor = MaterialTheme.colors.secondary
                     )
                     BottomNavigationItem(
                         icon = {
@@ -72,7 +79,8 @@ fun Home() {
                         selected = selectedIndex == 2,
                         onSelected = {
                             selectedIndex = 2
-                        }
+                        },
+                        activeColor = MaterialTheme.colors.secondary
                     )
                 }
             }
