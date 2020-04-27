@@ -9,7 +9,7 @@ import androidx.ui.material.TopAppBar
 import androidx.ui.res.stringResource
 import androidx.ui.unit.dp
 import com.mrk.composeimdb.R
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.IconButton
 import com.mrk.composeimdb.components.ImageNetwork
 import com.mrk.composeimdb.effects.observe
@@ -21,8 +21,8 @@ import me.alfredobejarano.retrofitadapters.data.ApiResult
 
 @Composable
 fun MovieDetail(movieId: String) {
-    val tmdb = TmdbServiceAmbient.current
-    val queryResult: ApiResult<Movie>? = observe(tmdb.getMovieById(movieId))
+    val viewModel = ViewModelAmbient.current
+    val queryResult: ApiResult<Movie>? = observe(viewModel.getMovieById(movieId))
 
     Scaffold(
         topAppBar = {

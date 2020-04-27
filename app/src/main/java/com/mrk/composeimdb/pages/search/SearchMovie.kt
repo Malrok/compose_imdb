@@ -1,6 +1,5 @@
 package com.mrk.composeimdb.pages.search
 
-import android.util.Log
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.setValue
@@ -14,17 +13,18 @@ import androidx.ui.layout.padding
 import androidx.ui.material.Surface
 import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.MovieCard
 import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.models.Movie
-import com.mrk.composeimdb.repositories.TmdbService
+import com.mrk.composeimdb.viewmodels.MainViewModel
+import timber.log.Timber
 
 @Composable
 fun SearchMovie() {
-    val tmdb = TmdbServiceAmbient.current
+    val viewModel = ViewModelAmbient.current
     var state by state { TextFieldValue("") }
-    val movies: List<Movie> = fetchMovies(tmdb = tmdb, search = state.text)
+    val movies: List<Movie> = fetchMovies(viewModel = viewModel, search = state.text)
 
     Column {
         Surface(
@@ -50,15 +50,15 @@ fun SearchMovie() {
 }
 
 @Composable
-fun fetchMovies(tmdb: TmdbService, search: String): List<Movie> {
+fun fetchMovies(viewModel: MainViewModel, search: String): List<Movie> {
     return if (search.isNotEmpty()) {
         val apiResult =
-            observe(tmdb.getMoviesListByTitle(search))
+            observe(viewModel.getMoviesListByTitle(search))
         if (apiResult != null && apiResult.error == null) {
             apiResult.body?.results!!
         } else {
             if (apiResult != null) {
-                Log.d("an error occurred", apiResult.error!!)
+                Timber.d("an error occurred ${apiResult.error!!}")
             }
             emptyList()
         }

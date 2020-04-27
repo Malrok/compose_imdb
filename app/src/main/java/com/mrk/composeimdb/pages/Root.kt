@@ -4,21 +4,20 @@ import androidx.compose.Composable
 import androidx.compose.Providers
 import androidx.ui.animation.Crossfade
 import androidx.ui.material.MaterialTheme
-import com.mrk.composeimdb.ambients.TmdbConfigurationAmbient
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.effects.observe
 import com.mrk.composeimdb.navigation.Navigation
 import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.pages.detail.MovieDetail
 import com.mrk.composeimdb.pages.home.Home
 import com.mrk.composeimdb.pages.splashscreen.Splashscreen
-import com.mrk.composeimdb.repositories.TmdbService
 import com.mrk.composeimdb.theme.lightThemeColors
+import com.mrk.composeimdb.viewmodels.MainViewModel
 
 @Composable
-fun Root(tmdb: TmdbService) {
+fun Root(viewModel: MainViewModel) {
     val configurationResult =
-        observe(tmdb.getConfig())
+        observe(viewModel.getConfig())
 
     MaterialTheme(
         colors = lightThemeColors
@@ -26,8 +25,7 @@ fun Root(tmdb: TmdbService) {
         Crossfade(Navigation.currentScreen) { screen ->
             if (configurationResult != null && configurationResult.error == null && configurationResult.body != null) {
                 Providers(
-                    TmdbServiceAmbient provides tmdb,
-                    TmdbConfigurationAmbient provides configurationResult.body!!
+                    ViewModelAmbient provides viewModel
                 ) {
                     when (screen) {
                         is Screen.Home -> Home()

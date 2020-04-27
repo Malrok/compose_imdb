@@ -6,18 +6,17 @@ import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
-import androidx.ui.foundation.Text
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.wrapContentSize
 import androidx.ui.material.CircularProgressIndicator
-import com.mrk.composeimdb.ambients.TmdbServiceAmbient
+import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.MovieCard
 import com.mrk.composeimdb.effects.observe
 import java.util.*
 
 @Composable
 fun RecentMovies() {
-    val tmdb = TmdbServiceAmbient.current
+    val viewModel = ViewModelAmbient.current
     val now = Calendar.getInstance()
     val before = Calendar.getInstance()
     before.add(Calendar.DAY_OF_MONTH, -30)
@@ -25,7 +24,7 @@ fun RecentMovies() {
     val minDate = DateFormat.format("yyyy-MM-dd", before).toString()
 
     val movies = observe(
-        tmdb.getRecentMovies(
+        viewModel.getRecentMovies(
             minDate,
             maxDate
         )
