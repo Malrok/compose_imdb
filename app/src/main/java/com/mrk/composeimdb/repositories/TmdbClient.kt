@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.mrk.composeimdb.BuildConfig
 import me.alfredobejarano.retrofitadapters.LiveDataAdapter
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -47,11 +48,11 @@ class TmdbClient {
             chain.proceed(request)
         }
 
-//        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-//            this.level = HttpLoggingInterceptor.Level.BODY
-//        }
-//
-//        builder.addInterceptor(interceptor)
+        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            this.level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        builder.addInterceptor(interceptor)
 
         return builder
     }

@@ -16,7 +16,7 @@ import androidx.ui.unit.Dp
 import com.squareup.picasso.Picasso
 
 @Composable
-fun ImageNetwork(url: String?, width: Dp, height: Dp) {
+fun ImageNetwork(modifier: Modifier = Modifier, url: String?, width: Dp, height: Dp) {
     val image = state<Bitmap?> { null }
 
     onCommit(url) {
@@ -43,7 +43,7 @@ fun ImageNetwork(url: String?, width: Dp, height: Dp) {
     }
 
     Box(
-        modifier = Modifier.preferredSize(width, height) + Modifier.wrapContentSize(Alignment.Center)
+        modifier = modifier + Modifier.preferredSize(width, height) + Modifier.wrapContentSize(Alignment.Center)
     ) {
         if (image.value != null) {
             Image(image.value!!.asImageAsset())

@@ -21,12 +21,12 @@ import com.mrk.composeimdb.effects.tmdbImageUrl
 import com.mrk.composeimdb.models.Movie
 import com.mrk.composeimdb.navigation.Screen
 import com.mrk.composeimdb.navigation.navigateTo
-import me.alfredobejarano.retrofitadapters.data.ApiResult
+import timber.log.Timber
 
 @Composable
 fun MovieDetail(movieId: String) {
     val viewModel = ViewModelAmbient.current
-    val queryResult: ApiResult<Movie>? = viewModel.getMovieById(movieId).observeAsState().value
+    val movie: Movie? = viewModel.getMovieById(movieId).observeAsState().value
 
     Scaffold(
         topAppBar = {
@@ -52,9 +52,9 @@ fun MovieDetail(movieId: String) {
             Box(
                 modifier = Modifier.padding(16.dp)
             ) {
-                if (queryResult?.body != null) {
-                    val movie = queryResult.body!!
+                if (movie != null) {
                     val url = tmdbImageUrl(movie)
+                    Timber.d("url $url")
                     VerticalScroller {
                         Column {
                             ImageNetwork(url = url, width = 64.dp, height = 64.dp)

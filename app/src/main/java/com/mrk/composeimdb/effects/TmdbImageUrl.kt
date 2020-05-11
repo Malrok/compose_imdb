@@ -8,5 +8,5 @@ import com.mrk.composeimdb.models.Movie
 fun tmdbImageUrl(movie: Movie): String {
     val config = ViewModelAmbient.current.getConfig().value?.body!!
 
-    return "${config.images.imageBaseUrl}${config.images.posterSizes[0]}${movie.posterPath}"
+    return "${config.images.imageBaseUrl}original${movie.posterPath}"
 }

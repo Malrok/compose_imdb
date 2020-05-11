@@ -7,7 +7,7 @@ data class Movie(
     var title: String,
     var overview: String,
     @SerializedName("poster_path") var posterPath: String,
-    var release: String,
+    @SerializedName("release_date") var release: String,
     var runtime: Int,
     @SerializedName("vote_average") var voteAverage: Double,
     @SerializedName("vote_count") var voteCount: Int,

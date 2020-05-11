@@ -5,15 +5,17 @@ import androidx.compose.getValue
 import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.*
+import androidx.ui.foundation.AdapterList
+import androidx.ui.foundation.Text
+import androidx.ui.foundation.TextFieldValue
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.livedata.observeAsState
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Surface
-import androidx.ui.unit.Dp
+import androidx.ui.material.FilledTextField
+import androidx.ui.res.stringResource
 import androidx.ui.unit.dp
+import com.mrk.composeimdb.R
 import com.mrk.composeimdb.ambients.ViewModelAmbient
 import com.mrk.composeimdb.components.MovieCard
 import com.mrk.composeimdb.models.Movie
@@ -27,18 +29,14 @@ fun SearchMovie() {
     val movies: List<Movie> = fetchMovies(viewModel = viewModel, search = state.text)
 
     Column {
-        Surface(
-            modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp),
-            border = Border(size = Dp.Hairline, color = MaterialTheme.colors.secondary)
-        ) {
-            TextField(
-                modifier = Modifier.padding(16.dp),
-                value = state,
-                onValueChange = {
-                    state = it
-                }
-            )
-        }
+        FilledTextField(
+            label = { Text(stringResource(id = R.string.search_hint )) },
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+            value = state,
+            onValueChange = {
+                state = it
+            }
+        )
         if (movies.isNotEmpty()) {
             AdapterList(data = movies) { movie ->
                 MovieCard(movie)
