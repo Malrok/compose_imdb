@@ -58,7 +58,6 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation("androidx.ui:ui-framework:$compose_version")
     implementation("androidx.ui:ui-layout:$compose_version")
     implementation("androidx.ui:ui-material:$compose_version")
     implementation("androidx.ui:ui-foundation:$compose_version")
