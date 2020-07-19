@@ -2,8 +2,9 @@ package com.mrk.composeimdb.components
 
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.clickable
 import androidx.ui.layout.Column
 import androidx.ui.layout.Row
 import androidx.ui.layout.padding
@@ -18,11 +19,11 @@ import com.mrk.composeimdb.theme.titleStyle
 @Composable
 fun MovieCard(movie: Movie) {
     val url = tmdbImageUrl(movie)
-    Clickable(onClick = {
+    Box(Modifier.clickable(onClick = {
         navigateTo(
             Screen.Detail(movie.id.toString())
         )
-    }) {
+    }), children = {
         Row(
             modifier = Modifier.padding(8.dp)
         ) {
@@ -42,7 +43,7 @@ fun MovieCard(movie: Movie) {
                 )
             }
         }
-    }
+    })
 }
 
 @Preview

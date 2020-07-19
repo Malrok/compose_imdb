@@ -4,8 +4,8 @@ import android.text.format.DateFormat
 import androidx.compose.Composable
 import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
+import androidx.ui.foundation.lazy.LazyColumnItems
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.wrapContentSize
 import androidx.ui.livedata.observeAsState
@@ -29,9 +29,9 @@ fun RecentMovies() {
         ).observeAsState().value
 
     if (movies != null) {
-        AdapterList(data = movies.body?.results!!) {
+        LazyColumnItems(items = movies.body?.results!!, itemContent = {
             MovieCard(movie = it)
-        }
+        })
     } else {
         Box(
             modifier = Modifier.fillMaxSize() + Modifier.wrapContentSize(Alignment.Center)

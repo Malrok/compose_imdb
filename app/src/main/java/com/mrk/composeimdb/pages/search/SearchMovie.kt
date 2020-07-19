@@ -5,9 +5,9 @@ import androidx.compose.getValue
 import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.TextFieldValue
+import androidx.ui.foundation.lazy.LazyColumnItems
+import androidx.ui.input.TextFieldValue
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
@@ -38,9 +38,9 @@ fun SearchMovie() {
             }
         )
         if (movies.isNotEmpty()) {
-            AdapterList(data = movies) { movie ->
+            LazyColumnItems(items = movies, itemContent = { movie ->
                 MovieCard(movie)
-            }
+            })
         } else {
             Text(text = "No movies found")
         }

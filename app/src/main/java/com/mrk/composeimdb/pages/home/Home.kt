@@ -25,7 +25,7 @@ fun Home() {
     var selectedIndex by state { 0 }
 
     Scaffold(
-        topAppBar = {
+        topBar = {
             TopAppBar(
                 title = {
                     Text(
@@ -49,7 +49,7 @@ fun Home() {
                 }
             }
         },
-        bottomAppBar = {
+        bottomBar = {
             BottomAppBar {
                 BottomNavigation {
                     BottomNavigationItem(

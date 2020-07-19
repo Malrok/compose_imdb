@@ -29,7 +29,7 @@ fun MovieDetail(movieId: String) {
     val movie: Movie? = viewModel.getMovieById(movieId).observeAsState().value
 
     Scaffold(
-        topAppBar = {
+        topBar = {
             TopAppBar(
                 title = {
                     Text(
